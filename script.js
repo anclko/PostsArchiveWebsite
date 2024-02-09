@@ -119,7 +119,7 @@ async function scroll() {
 
 //--------------------------------------- CREATING POST,COMMENT & TAGS -------------------------------//
 
-//creating post element
+//creating everything inside of the post container (post, comment and tag)
 function createPostElement(post, users, comments) {
 
     //CREATING POST
