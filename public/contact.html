@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<!--PUTTING CSS HERE TO CONTAIN IT IN ONE FILE-->
+<!--SINCE THERE IS NOT MUCH TO ADD ON HERE OTHER THAN FORM-->
+<style>
+    .contact-box{
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        background-color: #52bfe3;
+        border-radius: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    }
+
+    #contact-form {
+        margin-top: 20px;
+    }
+
+    label {
+    font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    button[type="submit"] {
+        width: 100%;
+        padding: 8px 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    .checkbox-group {
+        display: flex;
+        align-items: center;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+        margin-right: 5px;
+    }
+
+    button[type="submit"] {
+        background-color: #0056b3;
+        color: #fff;
+        margin-top: 10px;
+        border: none;
+        cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+        background-color: grey;
+    }
+
+</style>
+
+<body>
+    <header>
+        <h1>Contact Us</h1>
+    </header>
+
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="posts.html">Posts</a>
+        <a href="contact.html">Contact Us</a>
+    </nav>
+
+    <section class="contact-box">
+        <h2>Contact Us</h2>
+        <p>Do you want to send a story of your own? Please fill in the below information and one
+            our moderators will get in touch with you:</p>
+        <section id="contact-form">
+            <form action="#" method="post">
+                <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" required><br>
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" required pattern=".*@.*\..*"><br>
+            <input type="checkbox" id="confirm" name="confirm" required>
+            <label for="confirm">Confirm to send</label><br>
+            <button type="submit">Get in touch!</button>
+            </form>
+        </section>
+    </section>
+    
+    <footer>
+        © 2024 Anne-Claire Koch. All rights reserved. Pictures from: <a href="url">https://images.unsplash.com/</a> 
+    </footer>
+</body>
+</html>
