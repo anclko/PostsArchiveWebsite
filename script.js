@@ -178,7 +178,7 @@ function createPostElement(post, users, comments) {
 
             //add profil pic of commenter
             const commentImg = document.createElement('img');
-            commentImg.src = user ? user.image : '';
+            commentImg.src = comment.user.image;
             commentImg.width = 20;
             commentImg.classList.add('profile-icon');
 
