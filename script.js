@@ -1,38 +1,37 @@
 //-------------------------- FETCH --------------------- //
-// Fetch data with error control using basic fetch request
+//fetch data with network error control
 function fetchData(link) {
     return fetch(link)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response failed');
             }
+            //promise based
             return response.json();
         })
         .catch(error => {
-            console.error('Error getting the data:', error);
+            console.error('Error getting the link:', error);
             throw error;
         });
 }
 
-// Fetch posts
+//fetch posts
 function fetchPosts() {
     return fetchData('https://dummyjson.com/posts')
         .then(data => {
-            //below is iused to check if it works
             //console.log(data);
             return data.posts || [];
         })
         .catch(error => {
             console.error('Error getting the data:', error);
-            return []; // Return an empty array in case of error
+            return [];
         });
 }
 
-// Fetch users
+//fetch users
 function fetchUsers() {
     return fetchData('https://dummyjson.com/users')
         .then(data => {
-            //below is iused to check if it works
             //console.log(data);
             return data.users || [];
         })
@@ -42,11 +41,10 @@ function fetchUsers() {
         });
 }
 
-// Fetch comments
+//fetch comments
 function fetchComments() {
     return fetchData('https://dummyjson.com/comments')
         .then(data => {
-            //below is iused to check if it works
             //console.log(data);
             return data.comments || [];
         })
@@ -86,7 +84,7 @@ function showUserDetails(user) {
 
     popupBox.style.display = 'block';
 
-    //event listener for when button is clicked
+    //event listener for when close button is clicked
     document.getElementById('close-popup').addEventListener('click', () => {
         popupBox.style.display = 'none';
     });
@@ -97,7 +95,7 @@ function showUserDetails(user) {
 let page = 1;
 const postsPerPage = 5;
 
-//seperate posts, 5 by 5 and then get the posts
+//seperate posts, 5 by 5 and once they are loaded, get the next 5 pages
 async function load() {
     const startIndex = (page - 1) * postsPerPage;
     const endIndex = startIndex + postsPerPage;
