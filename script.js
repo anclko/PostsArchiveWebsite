@@ -63,7 +63,7 @@ function fetchComments() {
 
 //display final post
 async function displayPosts() {
-    // Load the first 5 scrolls
+    //load the first 5 scrolls
     await load();
 
     //event listeners to display rest of posts with scroll back
@@ -159,49 +159,57 @@ function createPostElement(post, users, comments) {
     postElement.appendChild(userElement);
 
     // CREATING COMMENTS
-    const postComments = comments.filter(comment => comment.postId === post.id);
+    const postComments = comments.filter(comment => post.id === comment.postId);
 
     if (postComments.length) {
-        
+    
         const commentsContainer = document.createElement('div');
         commentsContainer.classList.add('comments-container');
 
-        //comment header
         const commentsHeader = document.createElement('p');
         commentsHeader.textContent = 'Comments:';
         commentsContainer.appendChild(commentsHeader);
 
-        //go through comments
+        //go through the comments
         postComments.forEach(comment => {
             const commentElement = document.createElement('p');
 
+            //find the user compared with the comment
+            const commentUser = users.find(user => user.id === comment.postId);
 
-            //add profil pic of commenter
-            const commentImg = document.createElement('img');
-            commentImg.src = comment.user.image;
-            commentImg.width = 20;
-            commentImg.classList.add('profile-icon');
+            if (commentUser) {
+                //add profile pic of commenter
+                const commentImg = document.createElement('img');
+                commentImg.src = commentUser.image;
+                commentImg.width = 20;
+                commentImg.classList.add('profile-icon');
 
-            //username link for commenter
-            const commentUsername = document.createElement('span');
-            commentUsername.textContent = comment.user.username|| '';
-            commentUsername.style.cursor = 'pointer';
+                //username link for commenter
+                const commentUsername = document.createElement('span');
+                commentUsername.textContent = commentUser.username || '';
+                commentUsername.style.cursor = 'pointer';
 
-            commentUsername.onclick = () => showUserDetails(comment.user);
+                commentUsername.onclick = () => showUserDetails(commentUser);
 
-            //adding the comment
-            const commentBody = document.createElement('span');
-            commentBody.textContent = `: ${comment.body}`;
+                //adding the actual comment
+                const commentBody = document.createElement('span');
+                commentBody.textContent = `: ${comment.body}`;
 
-            //adding them to the paragraph
-            commentElement.appendChild(commentImg);
-            commentElement.appendChild(commentUsername);
-            commentElement.appendChild(commentBody);
-            commentsContainer.appendChild(commentElement);
+                //appedning
+                commentElement.appendChild(commentImg);
+                commentElement.appendChild(commentUsername);
+                commentElement.appendChild(commentBody);
+                commentsContainer.appendChild(commentElement);
+            } else {
+                //eerror handling if not found
+                commentElement.textContent = 'Unknown Commenter';
+                commentsContainer.appendChild(commentElement);
+            }
         });
 
         postElement.appendChild(commentsContainer);
     }
+
 
     //CREATING TAGS
     const tagsElement = document.createElement('p');
