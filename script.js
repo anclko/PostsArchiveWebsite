@@ -132,6 +132,8 @@ function createPostElement(post, users, comments) {
         `;
 
     const user = users.find(user => user.id === post.userId);
+    console.log(user);
+    console.log(post);
     const userElement = document.createElement('p');
 
     if (user) {
@@ -159,8 +161,10 @@ function createPostElement(post, users, comments) {
     postElement.appendChild(userElement);
 
     // CREATING COMMENTS
+    //this match is right - no need to consider
     const postComments = comments.filter(comment => post.id === comment.postId);
-
+    console.log(postComments); 
+    
     if (postComments.length) {
     
         const commentsContainer = document.createElement('div');
@@ -175,7 +179,7 @@ function createPostElement(post, users, comments) {
             const commentElement = document.createElement('p');
 
             //find the user compared with the comment
-            const commentUser = users.find(user => user.id === comment.postId);
+            const commentUser = users.find(user => comment.user.id === user.id);
 
             if (commentUser) {
                 //add profile pic of commenter
@@ -191,20 +195,19 @@ function createPostElement(post, users, comments) {
 
                 commentUsername.onclick = () => showUserDetails(commentUser);
 
-                //adding the actual comment
-                const commentBody = document.createElement('span');
-                commentBody.textContent = `: ${comment.body}`;
-
                 //appedning
                 commentElement.appendChild(commentImg);
                 commentElement.appendChild(commentUsername);
-                commentElement.appendChild(commentBody);
                 commentsContainer.appendChild(commentElement);
             } else {
                 //eerror handling if not found
                 commentElement.textContent = 'Unknown Commenter';
                 commentsContainer.appendChild(commentElement);
             }
+            //adding the actual comment
+                const commentBody = document.createElement('span');
+                commentBody.textContent = `: ${comment.body}`;
+                commentElement.appendChild(commentBody);
         });
 
         postElement.appendChild(commentsContainer);
